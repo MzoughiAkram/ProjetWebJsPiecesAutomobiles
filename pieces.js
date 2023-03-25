@@ -1,3 +1,9 @@
+//récupérer des pièces depuis un ficher JSON
+const reponse = await fetch('pieces-autos.json');
+const pieces = await reponse.json();
+
+//Création des balises
+for(let i=0; i<pieces.length; i++){
 const article = pieces[0];
 //let newDiv = document.createElement('div');
 //div.className = 'col-2 bg-secondary';
@@ -23,4 +29,4 @@ sectionFiches.appendChild(prixElement);
 sectionFiches.appendChild(categorieElement);
 sectionFiches.appendChild(descriptionElement);
 sectionFiches.appendChild(disponibiltéElement);
-
+}
