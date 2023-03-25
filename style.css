@@ -1,0 +1,6 @@
+.fiches img {
+	max-width: 200px;
+    font-size: small;
+    display: flex;
+    flex-direction: row;
+}
