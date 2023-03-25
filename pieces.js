@@ -4,7 +4,7 @@ const pieces = await reponse.json();
 
 //Création des balises
 for(let i=0; i<pieces.length; i++){
-const article = pieces[0];
+const article = pieces[i];
 //let newDiv = document.createElement('div');
 //div.className = 'col-2 bg-secondary';
 const imageElement = document.createElement("img");
@@ -30,3 +30,40 @@ sectionFiches.appendChild(categorieElement);
 sectionFiches.appendChild(descriptionElement);
 sectionFiches.appendChild(disponibiltéElement);
 }
+
+//Création de filtres
+//trie moin cher
+const boutonTrier = document.querySelector(".btn-trier");
+boutonTrier.addEventListener("click", function(){
+    const piecesOrdonnees = Array.from(pieces);
+    piecesOrdonnees.sort(function(a,b){
+        return a.prix-b.prix;
+    });
+
+    console.log(piecesOrdonnees);
+});
+//trie des pièces inférieur ou égale à 35€
+const boutonFiltrer = document.querySelector(".btn-filtrer");
+boutonFiltrer.addEventListener("click", function(){
+    const piecesFiltrees = pieces.filter(function(piece) {
+        return piece.prix <= 35;
+    });
+    console.log(piecesFiltrees);
+});
+//trie des pièces qui ont une description
+const boutonDescription = document.querySelector(".btn-description");
+boutonDescription.addEventListener("click", function(){
+    const piecesDescriptions = pieces.filter(function(p) {
+        return p.description;
+    });
+    console.log(piecesDescriptions);
+});
+//trie plus cher
+const boutonTrie = document.querySelector(".btn-trie");
+boutonTrie.addEventListener("click", function(){
+    const piecesOrdonnees = Array.from(pieces);
+    piecesOrdonnees.sort(function(a,b){
+        return b.prix-a.prix;
+    });
+    console.log(piecesOrdonnees);
+});
