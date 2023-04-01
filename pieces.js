@@ -89,7 +89,27 @@ for(let i=0; i<noms.length; i++){
 document.querySelector('.abordable')
 .appendChild(abordablesElements)
 
+//Afiicher le nom de toutes les pieces disponibles et leur prix
+const nomDispo = pieces.map(piece=>piece.nom)
+const prixDispo = pieces.map(piece=>piece.prix)
+for(let i=pieces.length-1; i>=0; i--){
+    if(pieces[i].disponibilté === false){
+        nomDispo.splice(i,1)
+        prixDispo.splice(i,1)
+    }
 
+}
+//création de la liste
+const disponibleElement = document.createElement('ul');
+//Ajout de chaque nom à la liste
+for(let i=0; i<nomDispo.length; i++){
+    const nomElement = document.createElement('li');
+    nomElement.innerText = `${nomDispo[i]} - ${prixDispo[i]}€`;
+    disponibleElement.appendChild(nomElement);
+}
+// Ajout de l'en-tête puis de la liste au bloc résultats filtres
+document.querySelector('.disponible')
+.appendChild(disponibleElement)
 
 
 
