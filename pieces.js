@@ -5,8 +5,8 @@ const pieces = await reponse.json();
 //Création des balises
 for(let i=0; i<pieces.length; i++){
 const article = pieces[i];
-//let newDiv = document.createElement('div');
-//div.className = 'col-2 bg-secondary';
+//var newDiv = document.createElement('div');
+//div.className = 'col-4';
 const imageElement = document.createElement("img");
 imageElement.src = article.image;
 const nomElement = document.createElement("h2");
@@ -23,6 +23,7 @@ disponibiltéElement.innerText = article.disponibilté;
 //Rattachement de nos balises au DOM
 const sectionFiches = document.querySelector(".fiches");
 //document.body.appendChild(newDiv);
+
 sectionFiches.appendChild(imageElement);
 sectionFiches.appendChild(nomElement);
 sectionFiches.appendChild(prixElement);
@@ -67,3 +68,28 @@ boutonTrie.addEventListener("click", function(){
     });
     console.log(piecesOrdonnees);
 });
+
+//Afiicher le nom de toutes les pieces abordables
+const noms = pieces.map(piece=>piece.nom);
+for(let i=pieces.length-1; i>=0; i--){
+    if(pieces[i].prix>35){
+        noms.splice(i,1)
+    }
+}
+//création de la liste
+const abordablesElements = document.createElement('ul');
+//Ajout de chaque nom à la liste
+for(let i=0; i<noms.length; i++){
+    const nomElement = document.createElement('li');
+    nomElement.innerText = noms[i];
+    abordablesElements.appendChild(nomElement);
+
+}
+// Ajout de l'en-tête puis de la liste au bloc résultats filtres
+document.querySelector('.abordable')
+.appendChild(abordablesElements)
+
+
+
+
+
