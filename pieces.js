@@ -167,5 +167,15 @@ for(let i=0; i<nomDispo.length; i++){
 document.querySelector('.disponible')
 .appendChild(disponibleElement)
 
+//filtrer à l'aide du range
+const Range = document.querySelector('#prixMax');
+Range.addEventListener('input', function(){
+    const piecesRangers = pieces.filter(function(piece){
+        return piece.prix <= Range.value;
+        
+    });
 
-
+// Effacement de l'écran et regénération de la page avec les pièces filtrées uniquement
+document.querySelector('.fiches').innerHTML ="";
+genererPieces(piecesRangers);
+})

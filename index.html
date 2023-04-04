@@ -46,23 +46,25 @@
         <section>
             <div class="container-fluid mt-2 m-1">
                 <div class="row">
-                    <div class="col-2 bg-primary mx-2 pt-4" style="height: 30rem;">
+                    <div class="col-2 bg-secondary mx-2 pt-4" style="height: 30rem;">
                         <!--Création des boutons filter-->
-                        <section class="filtres">
-                            Filtres
+                        <section class="filtres text-white">
+                            Filtres :
                         </section><br>
                         <section>
-                            <button class="btn-trier">Trier par prix croissant</button>
+                            <button type="button" class="btn-trier btn btn-primary">Trier par prix croissant</button>
                         </section><br>
                         <section>
-                            <button class="btn-filtrer">Filtrer les pièces non abordables</button>
+                            <button type="button" class="btn-filtrer btn btn-primary">Filtrer les pièces non abordables</button>
                         </section><br>
                         <section>
-                            <button class="btn-description">Afficher les pièces qui possède une decription</button>
+                            <button type="button" class="btn-description btn btn-primary">Afficher les pièces qui possède une decription</button>
                         </section>
                         <section><br>
-                            <button class="btn-trie">Trier par prix croissant décroissant</button>
-                        </section>          
+                            <button type="button" class="btn-trie btn btn-primary">Trier par prix croissant décroissant</button>
+                        </section><br> 
+                        <label for="prixMax" class="form-label text-white">Prix maximum :
+                        <input type="range" name="prixMax" class="form-range" min="0" max="60" step="5" id="prixMax">        
 
                     </div>
                     
@@ -72,7 +74,7 @@
                         <!-- Fiches produits -->
 			            <!--<section class="fiches ">
 			            </section>-->
-                        <div class="abordable">
+                        <div class="abordable"> 
                             <p class="head">Nom des pieces abordables</p>
                         </div>
                         <div class="disponible">
