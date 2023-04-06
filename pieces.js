@@ -174,8 +174,16 @@ Range.addEventListener('input', function(){
         return piece.prix <= Range.value;
         
     });
-
+   
 // Effacement de l'écran et regénération de la page avec les pièces filtrées uniquement
 document.querySelector('.fiches').innerHTML ="";
 genererPieces(piecesRangers);
+})
+
+
+//Ajout d'un bouton pour rénitialiser les filtres
+const boutonReset = document.querySelector(".btn-reset");
+boutonReset.addEventListener("click", function(){
+    document.querySelector('.fiches').innerHTML ="";
+    genererPieces(pieces);
 })
