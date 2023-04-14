@@ -1,5 +1,8 @@
+import { ajoutListenersAvis } from "./avis.js";
 //récupérer des pièces depuis un ficher JSON
-const reponse = await fetch('pieces-autos.json');
+//const reponse = await fetch('pieces-autos.json');
+//récupérer des pièces depuis un API
+const reponse = await fetch('http://localhost:8081/pieces');
 const pieces = await reponse.json();
 
 //Création des balises
@@ -8,6 +11,8 @@ for(let i=0; i<pieces.length; i++){
     const article = pieces[i];
 //var newDiv = document.createElement('div');
 //div.className = 'col-4';
+    //Rattachement de nos balises au DOM
+    const sectionFiches = document.querySelector(".fiches");    
     const pieceElement = document.createElement("article");
     const imageElement = document.createElement("img");
     imageElement.src = article.image;
@@ -15,26 +20,34 @@ for(let i=0; i<pieces.length; i++){
     nomElement.innerText = article.nom;
     const prixElement = document.createElement("p");
     prixElement.innerText = `Prix: ${article.prix} € (${article.prix < 35 ? "€" : "€€€"})`;
-    const categorieElement = document.createElement('p');
+    const categorieElement = document.createElement("p");
     categorieElement.innerText = article.categorie ?? "(aucune catégorie)";
-    const descriptionElement = document.createElement('p');
+    const descriptionElement = document.createElement("p");
     descriptionElement.innerText = article.description ?? "(aucune description)";
-    const disponibiltéElement = document.createElement('p');
-    disponibiltéElement.innerText = article.disponibilté;
+    const disponibiltéElement = document.createElement("p");
+    disponibiltéElement.innerText = article.disponibilté ? "En stock" : "Rupture de stock";
+    //Code ajouté
+    const avisBouton = document.createElement("button");
+    avisBouton.dataset.id = article.id;
+    avisBouton.textContent = "Afficher les avis";
 
-//Rattachement de nos balises au DOM
-    const sectionFiches = document.querySelector(".fiches");
+
 //document.body.appendChild(newDiv);
+    sectionFiches.appendChild(pieceElement);
+    pieceElement.appendChild(imageElement);
+    pieceElement.appendChild(nomElement);
+    pieceElement.appendChild(prixElement);
+    pieceElement.appendChild(categorieElement);
+    pieceElement.appendChild(descriptionElement);
+    pieceElement.appendChild(disponibiltéElement);
 
-    sectionFiches.appendChild(imageElement);
-    sectionFiches.appendChild(nomElement);
-    sectionFiches.appendChild(prixElement);
-    sectionFiches.appendChild(categorieElement);
-    sectionFiches.appendChild(descriptionElement);
-    sectionFiches.appendChild(disponibiltéElement);
+    //Code aJouté
+    pieceElement.appendChild(avisBouton);
     // On rattache la balise article au body
-    document.body.appendChild(pieceElement);
+    //document.body.appendChild(pieceElement);
+    
     }
+    ajoutListenersAvis();
 }
 
 
