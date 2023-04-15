@@ -46,7 +46,7 @@
         <section>
             <div class="container-fluid mt-2 m-1">
                 <div class="row">
-                    <div class="col-2 bg-secondary mx-2 pt-4" style="height: 50rem;">
+                    <div class="col-2 bg-secondary mx-2 pt-4" style="height: 53rem;">
                         <!--Création des boutons filter-->
                         <section class="filtres text-white">
                             Filtres :
@@ -65,7 +65,29 @@
                         </section><br> 
                         <label for="prixMax" class="form-label text-white">Prix maximum :
                         <input type="range" name="prixMax" class="form-range" min="0" max="60" step="5" id="prixMax">        
-                        
+                        <h3 class="text-warning text-decoration-underline">Ajouter un avis</h3>
+                        <form class="formulaire-avis">
+                            <div class="mb-3">
+                              <label class="form-Id">Identifiant de la pièce :</label>
+                              <input type="number" class="idPiece" name="piece-id">
+                              
+                            </div>
+                            <div class="mb-3">
+                              <label class="form-User">Nom d'utilisateur :</label>
+                              <input type="text" class="nomUtilisateur" name="utilisateur">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-Comment">Commentaire :</label>
+                                <textarea class="Commentaire" name="comment" rows="3"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-etoiles">Note :</label>
+                              <input type="number" class="etoiles" name="nbrEtoiles" min="0" max="5">
+                            </div>
+                            
+                                <button type="submit" class="btn btn-primary">Envoyer</button>
+                            
+                          </form>
                         
                         
                           <section><br>

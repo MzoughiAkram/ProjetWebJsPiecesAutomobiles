@@ -1,9 +1,12 @@
-import { ajoutListenersAvis } from "./avis.js";
+import { ajoutListenersAvis, ajoutListenerEnvoyerAvis } from "./avis.js";
+
 //récupérer des pièces depuis un ficher JSON
 //const reponse = await fetch('pieces-autos.json');
 //récupérer des pièces depuis un API
-const reponse = await fetch('http://localhost:8081/pieces');
+const reponse = await fetch('http://localhost:8081/pieces/');
 const pieces = await reponse.json();
+// on appel la fonction pour ajouter le listener au formulaire
+ajoutListenerEnvoyerAvis()
 
 //Création des balises
 function genererPieces(pieces){
@@ -49,7 +52,6 @@ for(let i=0; i<pieces.length; i++){
     }
     ajoutListenersAvis();
 }
-
 
 /*// Récupération des pièces depuis le fichier JSON
 const pieces = await fetch("pieces-autos.json").then(pieces=>pieces.js());
