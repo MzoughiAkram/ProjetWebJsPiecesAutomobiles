@@ -6,8 +6,10 @@
   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
   	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="/style.css"> 
+    <link rel="stylesheet" href="/style.css">
+    <script src="node_modules/chart.js/dist/chart.umd.js" defer></script>    
     <script type="module" src="pieces.js" defer></script>
+    
     <title>Pièces Autos</title>
 
 </head>
@@ -46,7 +48,7 @@
         <section>
             <div class="container-fluid mt-2 m-1">
                 <div class="row">
-                    <div class="col-2 bg-secondary mx-2 pt-4" style="height: 53rem;">
+                    <div class="col-2 bg-secondary mx-2 pt-4" style="height: 60rem;">
                         <!--Création des boutons filter-->
                         <section class="filtres text-white">
                             Filtres :
@@ -78,7 +80,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-Comment">Commentaire :</label>
-                                <textarea class="Commentaire" name="comment" rows="3"></textarea>
+                                <textarea class="Commentaire" name="comment" rows="2"></textarea>
                             </div>
                             <div class="mb-3">
                                 <label class="form-etoiles">Note :</label>
@@ -88,11 +90,19 @@
                                 <button type="submit" class="btn btn-primary">Envoyer</button>
                             
                           </form>
-                        
-                        
+
+                          <section>
+                          <h3>Données :</h3>
+                          <button type="button" class="btn-maj btn btn-warning" onclick="">Mettre à jour les pièces</button>
+                        </section>
                           <section><br>
                             <button type="button" class="btn-reset btn btn-success" onclick="resetPage()">Rénitialiser le filtre</button>
                         </section>
+                        <section><br>
+                            <h3 class="text-black">Apperçu des avis</h3>
+                            <canvas id="graphique-avis" width="200" height="300" style="border:solid black"></canvas>
+                        </section>
+                        
                     </div>
                     
                     
@@ -101,6 +111,7 @@
                         <!-- Fiches produits -->
 			            <!--<section class="fiches ">
 			            </section>-->
+                        
                         <div class="abordable"> 
                             <p class="head">Nom des pieces abordables</p>
                         </div>
