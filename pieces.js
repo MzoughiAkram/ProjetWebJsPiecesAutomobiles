@@ -1,10 +1,24 @@
-import { ajoutListenersAvis, ajoutListenerEnvoyerAvis } from "./avis.js";
+import { ajoutListenersAvis, ajoutListenerEnvoyerAvis, afficherAvis, afficherGraphiqueAvis } from "./avis.js";
 
 //récupérer des pièces depuis un ficher JSON
 //const reponse = await fetch('pieces-autos.json');
+//const pieces = await reponse.json();
+//Récupération des pièces stockées dans le localStorage
+let pieces = window.localStorage.getItem('pieces');
+if(pieces===null){
+
 //récupérer des pièces depuis un API
 const reponse = await fetch('http://localhost:8081/pieces/');
-const pieces = await reponse.json();
+pieces = await reponse.json();
+// Transformation des pièces en JSON
+const valeurPieces = JSON.stringify(pieces);
+//Stockage des informations dans le localStorage
+window.localStorage.setItem("pieces", valeurPieces);
+
+} else {
+    pieces = JSON.parse(pieces);
+}
+
 // on appel la fonction pour ajouter le listener au formulaire
 ajoutListenerEnvoyerAvis()
 
@@ -84,9 +98,21 @@ function genererPieces(pieces){
 
     }
 }*/
-
 //premier affichage de la page
 genererPieces(pieces);
+
+
+for(let i = 0; i < pieces.length; i++){
+    const id = pieces[i].id;
+    const avisJSON = window.localStorage.getItem(`avis-piece-${id}`);
+    const avis = JSON.parse(avisJSON);
+
+    if(avis !== null){
+        const pieceElement = document.querySelector(`article[data-id="${id}"]`);
+        afficherAvis(pieceElement, avis)
+    }
+}
+
 
 //Création de filtres
 //trie moin cher"pieces-autos.json
@@ -143,8 +169,8 @@ boutonTrie.addEventListener("click", function(){
 //Afiicher le nom de toutes les pieces abordables
 const noms = pieces.map(piece=>piece.nom);
 for(let i=pieces.length-1; i>=0; i--){
-    if(pieces[i].prix>35){
-        noms.splice(i,1)
+    if(pieces[i].prix>35) {
+        noms.splice(i, 1);
     }
 }
 //création de la liste
@@ -165,8 +191,8 @@ const nomDispo = pieces.map(piece=>piece.nom)
 const prixDispo = pieces.map(piece=>piece.prix)
 for(let i=pieces.length-1; i>=0; i--){
     if(pieces[i].disponibilté === false){
-        nomDispo.splice(i,1)
-        prixDispo.splice(i,1)
+        nomDispo.splice(i, 1);
+        prixDispo.splice(i ,1);
     }
 
 }
@@ -202,3 +228,11 @@ boutonReset.addEventListener("click", function(){
     document.querySelector('.fiches').innerHTML ="";
     genererPieces(pieces);
 })
+
+// Ajout du listener pour mettre à jour des données du localStorage
+const boutonMettreAJour = document.querySelector(".btn-maj");
+boutonMettreAJour.addEventListener("click", function () {
+window.localStorage.removeItem("pieces");
+});
+
+await afficherGraphiqueAvis();
