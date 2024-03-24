@@ -1,4 +1,5 @@
-import { ajoutListenersAvis, ajoutListenerEnvoyerAvis, afficherAvis, afficherGraphiqueAvis } from "./avis.js";
+import { ajoutListenersAvis, ajoutListenerEnvoyerAvis, 
+    afficherAvis, afficherGraphiqueAvis } from "./avis.js";
 
 //récupérer des pièces depuis un ficher JSON
 //const reponse = await fetch('pieces-autos.json');
@@ -27,10 +28,11 @@ function genererPieces(pieces){
 for(let i=0; i<pieces.length; i++){
     const article = pieces[i];
 //var newDiv = document.createElement('div');
-//div.className = 'col-4';
+//div.className = 'col-2';
     //Rattachement de nos balises au DOM
     const sectionFiches = document.querySelector(".fiches");    
     const pieceElement = document.createElement("article");
+    pieceElement.dataset.id = pieces[i].id
     const imageElement = document.createElement("img");
     imageElement.src = article.image;
     const nomElement = document.createElement("h2");
@@ -102,12 +104,12 @@ function genererPieces(pieces){
 genererPieces(pieces);
 
 
-for(let i = 0; i < pieces.length; i++){
+for (let i = 0; i < pieces.length; i++) {
     const id = pieces[i].id;
     const avisJSON = window.localStorage.getItem(`avis-piece-${id}`);
     const avis = JSON.parse(avisJSON);
 
-    if(avis !== null){
+    if (avis !== null) {
         const pieceElement = document.querySelector(`article[data-id="${id}"]`);
         afficherAvis(pieceElement, avis)
     }
@@ -132,7 +134,7 @@ boutonTrier.addEventListener("click", function(){
 const boutonFiltrer = document.querySelector(".btn-filtrer");
 boutonFiltrer.addEventListener("click", function(){
     const piecesFiltrees = pieces.filter(function(piece) {
-        return piece.prix <= 35;
+        return piece.prix <= inputPrixMax.value;
     });
     // Effacement de l'écran et regénération de la page avec les pièces filtrées uniquement
     document.querySelector('.fiches').innerHTML ="";
@@ -166,7 +168,7 @@ boutonTrie.addEventListener("click", function(){
     //console.log(piecesOrdonnees);
 });
 
-//Afiicher le nom de toutes les pieces abordables
+//Aficher le nom de toutes les pieces abordables
 const noms = pieces.map(piece=>piece.nom);
 for(let i=pieces.length-1; i>=0; i--){
     if(pieces[i].prix>35) {
